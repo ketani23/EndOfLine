@@ -1,0 +1,8 @@
+{
+"ui": [
+{
+	"label": "Shadow Density",
+    "bindingName": "shadowDensity"
+}
+]
+}

@@ -1,0 +1,23 @@
+{
+"ui": [
+{
+	"label": "Main Color",
+    "bindingName": "mainColor",
+	"widget": "color"
+},
+{
+	"label": "Main Texture",
+	"bindingName": "mainTexture",
+	"widget": "texture_group"
+},
+{
+	"label": "Mak Texture",
+	"bindingName": "maskTexture",
+	"widget": "texture_group"
+},
+{
+	"label": "UV Scale",
+	"bindingName": "uvScale"
+}
+]
+}

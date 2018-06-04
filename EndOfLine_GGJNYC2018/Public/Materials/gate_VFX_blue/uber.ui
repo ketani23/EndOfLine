@@ -1,0 +1,672 @@
+{
+"ui": [
+{
+    "label": "Vertex Color",
+    "bindingType": "defineSelect",
+    "values": [
+        {
+            "value": "",
+            "label": "None",
+            "hint": "Ignore vertex color."
+        },
+        {
+            "value": "ENABLE_VERTEX_COLOR_BASE",
+            "label": "Base Color",
+            "hint": "Multiply vertex color rgba into 'Base Color', and 'Base Texture', if set."
+        },        
+        {
+            "value": "ENABLE_VERTEX_COLOR_EMISSIVE",
+            "label": "Emissive",
+            "hint": "Use vertex color rgb as emissive, or add it on top of the 'Emissive Texture', if set."
+        },
+        {
+            "value": "ENABLE_VERTEX_COLOR_AO",
+            "label": "AO",
+            "hint": "Use vertex color rgb as AO, or multiply it into the 'AO Texture', if set."
+        }
+    ],
+    "hint": "Specifies the purpose for which vertex color will be used. \nRequires vertex color to be supplied by the mesh."
+},
+{
+    "bindingName": "baseColor",
+    "widget": "color",
+    "hint": "Specifies the base color (albedo) of the material if the 'Base Textre' is disabled. \nMultiplied with the 'Base Texture' otherwise."
+},
+{
+	"label": "Base Texture",
+    "bindingName": "ENABLE_BASE_TEX",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "Most materials use a base texture (albedo), but disabling it means the base texture will be considered white, and 'Base Color' will solely control the color."
+},
+    {
+		"label": "Texture",
+        "bindingName": "baseTex",
+        "widget": "texture_group"
+    },
+    {
+        "label": "Texture UV",
+        "bindingType": "defineSelect",
+        "values": [
+            {
+                "value": "baseTexUV 0",
+                "label": "Mesh UV 0",
+                "hint": "First UV set supplied by mesh. Default UV set on all meshes."
+            },
+            {
+                "value": "baseTexUV 1",
+                "label": "Mesh UV 1",
+                "hint": "Second UV set supplied by mesh. Optionally available if supplied from content creation tool."
+            },
+            {
+                "value": "baseTexUV 2",
+                "label": "Transformed UV 2",
+                "hint": "Requires 'Enable UV2' to be on."
+            },
+            {
+                "value": "baseTexUV 3",
+                "label": "Transformed UV 3",
+                "hint": "Requires 'Enable UV3' to be on."
+            }
+        ],
+        "hint": "Specifies the UV set used for sampling this texture."
+    },
+{
+    "_bindingName": "ENABLE_BASE_TEX",
+    "widget": "group_end"
+},
+{
+	"label": "Opacity Texture",
+    "bindingName": "ENABLE_OPACITY_TEX",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "Normally, the Base Texture's alpha is taken as opacity. Enabling this allows you to define a separate greyscale opacity texture. \nThe 'Opacity Texture' value will be multiplied with the Base Texture's alpha (which is 1 for textures without alpha) to get the final opacity. \n'Opacity Texture' is only available if 'Blend Mode' is not 'Disabled'."
+},
+    {
+		"label": "Texture",
+        "bindingName": "opacityTex",
+        "widget": "texture_group"
+    },
+    {
+        "label": "Texture UV",
+        "bindingType": "defineSelect",
+        "values": [
+            {
+                "value": "opacityTexUV 0",
+                "label": "Mesh UV 0",
+                "hint": "First UV set supplied by mesh. Default UV set on all meshes."
+            },
+            {
+                "value": "opacityTexUV 1",
+                "label": "Mesh UV 1",
+                "hint": "Second UV set supplied by mesh. Optionally available if supplied from content creation tool."
+            },
+            {
+                "value": "opacityTexUV 2",
+                "label": "Transformed UV 2",
+                "hint": "Requires 'Enable UV2' to be on."
+            },
+            {
+                "value": "opacityTexUV 3",
+                "label": "Transformed UV 3",
+                "hint": "Requires 'Enable UV3' to be on."
+            }
+        ],
+        "hint": "Specifies the UV set used for sampling this texture."
+    },
+{
+    "_bindingName": "ENABLE_OPACITY_TEX",
+    "widget": "group_end"
+},
+{
+    "bindingName": "alphaTestThreshold",
+    "widget": "slider",
+    "min": 0.0,
+    "max": 1.0,
+    "step": 0.001,
+    "default": 0.5,
+    "hint": "When the 'Alpha Test' blend mode is enabled, pixels with alpha values lower than this disappear."
+},
+{
+	"label": "Normal Map",
+    "bindingName": "ENABLE_NORMALMAP",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "Enables the normal map texture and normal mapping. \nWhen this is disabled, the per pixel normal is solely determined by the interpolated vertex normals."
+},
+    {
+		"label": "Texture",
+        "bindingName": "normalTex",
+        "widget": "texture_group"
+    },
+    {
+        "label": "Texture UV",
+        "bindingType": "defineSelect",
+        "values": [
+            {
+                "value": "normalTexUV 0",
+                "label": "Mesh UV 0",
+                "hint": "First UV set supplied by mesh. Default UV set on all meshes."
+            },
+            {
+                "value": "normalTexUV 1",
+                "label": "Mesh UV 1",
+                "hint": "Second UV set supplied by mesh. Optionally available if supplied from content creation tool."
+            },
+            {
+                "value": "normalTexUV 2",
+                "label": "Transformed UV 2",
+                "hint": "Requires 'Enable UV2' to be on."
+            },
+            {
+                "value": "normalTexUV 3",
+                "label": "Transformed UV 3",
+                "hint": "Requires 'Enable UV3' to be on."
+            }
+        ],
+        "hint": "Specifies the UV set used for sampling this texture."
+    },
+{
+    "_bindingName": "ENABLE_NORMALMAP",
+    "widget": "group_end"
+},
+{
+	"label": "Emissive",
+    "bindingName": "ENABLE_EMISSIVE",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "Enables the emissive texture."
+},
+    {
+		"label": "Texture",
+        "bindingName": "emissiveTex",
+        "widget": "texture_group"
+    },
+    {
+        "label": "Texture UV",
+        "bindingType": "defineSelect",
+        "values": [
+            {
+                "value": "emissiveTexUV 0",
+                "label": "Mesh UV 0",
+                "hint": "First UV set supplied by mesh. Default UV set on all meshes."
+            },
+            {
+                "value": "emissiveTexUV 1",
+                "label": "Mesh UV 1",
+                "hint": "Second UV set supplied by mesh. Optionally available if supplied from content creation tool."
+            },
+            {
+                "value": "emissiveTexUV 2",
+                "label": "Transformed UV 2",
+                "hint": "Requires 'Enable UV2' to be on."
+            },
+            {
+                "value": "emissiveTexUV 3",
+                "label": "Transformed UV 3",
+                "hint": "Requires 'Enable UV3' to be on."
+            }
+        ],
+        "hint": "Specifies the UV set used for sampling this texture."
+    },
+    {
+        "label": "Color",
+        "bindingName": "emissiveColor",
+        "widget": "color",
+        "hint": "Multiplies the existing emissive color. \nRequires 'Enable Emissive' and/or 'Vertex Color' should be set to 'Emissive'."
+    },
+    {
+        "label": "Intensity",
+        "bindingName": "emissiveIntensity",
+        "widget": "slider",
+        "min": 0.0,
+        "max": 10.0,
+        "step": 0.001,
+        "value": 1.0,
+        "hint": "Multiplies the existing emissive color. \nRequires 'Enable Emissive' and/or 'Vertex Color' should be set to 'Emissive'."
+    },
+{
+    "_bindingName": "ENABLE_EMISSIVE",
+    "widget": "group_end"
+},
+{
+	"label": "Simple Reflection",
+    "bindingName": "ENABLE_SIMPLE_REFLECTION",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "Replaces the default PBR environment mapping with a simple lookup from a regular texture (no hdr, no roughness, no fresnel, etc.). \nIt can even be used with unlit materials. The reflection lookup technically assumes a spherical environment map, which is a circular \nshaped texture as obtained by photographing a mirror ball. However, as a shortcut, it is sometimes used with simple, flat photos, and \nmanually bent mesh normals. Note: this spherical mapping is technically different from the 'angular' envmap format that looks similar."
+},
+    {
+    	"label": "Texture",
+        "bindingName": "reflectionTex",
+        "widget": "texture_group"
+    },
+    {
+        "label": "Intensity",
+        "bindingName": "reflectionIntensity",
+        "widget": "slider",
+        "min": 0.0,
+        "max": 10.0,
+        "step": 0.001,
+        "default": 1.0
+    },
+{
+    "_bindingName": "ENABLE_SIMPLE_REFLECTION",
+    "widget": "group_end"
+},
+{
+	"label": "Rim Highlight",
+    "bindingName": "ENABLE_RIM_HIGHLIGHT",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "'Rim highlight', aka. 'fake Fresnel effect'."
+},
+	{
+		"label": "Color",
+        "bindingName": "rimColor",
+        "widget": "color",
+        "hint": "Specifies the color of the rim highlight."
+    },
+    {
+    	"label": "Intensity",
+        "bindingName": "rimIntensity",
+        "widget": "slider",
+        "min": 0.0,
+        "max": 10.0,
+        "step": 0.001,
+        "default": 1.0,
+        "hint": "Multiplied with 'Rim Color'."
+    },
+    {
+    	"label": "Exponent",
+        "bindingName": "rimExponent",
+        "widget": "slider",
+        "min": 0.0,
+        "max": 10.0,
+        "step": 0.001,
+        "default": 1.0,
+        "hint": "Controls the tightness of the rim highlight."
+    },
+    {
+    	"label": "Rim Color Texture",
+        "bindingName": "ENABLE_RIM_COLOR_TEX",
+        "bindingType": "define",
+        "widget": "group_start",
+        "hint": "Allows the use of a texture to modulate the rim highlight color."
+    },
+    {
+    	"label": "Texture",
+        "bindingName": "rimColorTex",
+        "widget": "texture_group"
+    },
+    {
+        "label": "Texture UV",
+        "bindingType": "defineSelect",
+        "values": [
+            {
+                "value": "rimColorTexUV 0",
+                "label": "Mesh UV 0",
+                "hint": "First UV set supplied by mesh. Default UV set on all meshes."
+            },
+            {
+                "value": "rimColorTexUV 1",
+                "label": "Mesh UV 1",
+                "hint": "Second UV set supplied by mesh. Optionally available if supplied from content creation tool."
+            },
+            {
+                "value": "rimColorTexUV 2",
+                "label": "Transformed UV 2",
+                "hint": "Requires 'Enable UV2' to be on."
+            },
+            {
+                "value": "rimColorTexUV 3",
+                "label": "Transformed UV 3",
+                "hint": "Requires 'Enable UV3' to be on."
+            }
+        ],
+        "hint": "Specifies the UV set used for sampling this texture."
+    },
+    {
+        "_bindingName": "ENABLE_RIM_COLOR_TEX",
+        "widget": "group_end"
+    },
+{
+    "_bindingName": "ENABLE_RIM_HIGHLIGHT",
+    "widget": "group_end"
+},
+{
+	"label": "Lighting",
+    "bindingName": "ENABLE_LIGHTING",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "Enables direct and indirect (ambient) lighting. Disabling this creates an unlit (flat) shader."
+},
+    {
+    	"label": "Diffuse",
+        "bindingName": "ENABLE_DIFFUSE_LIGHTING",
+        "bindingType": "define",
+        "hint": "Enables direct and indirect diffuse lighting. Can be disabled as an optimization on pure metals."
+    },
+    {
+    	"label": "Specular",
+        "bindingName": "ENABLE_SPECULAR_LIGHTING",
+        "bindingType": "define",
+        "widget": "group_start",
+        "hint": "Enables direct and indirect specular lighting (specular highlights and reflections). \nDisabling this creates a shader that's only lit diffusely."
+    },
+        {
+        	"label": "Material Params",
+            "bindingName": "materialParamsTex",
+            "widget": "texture_group",
+            "hint": "Material params texture should have: R - metalness, G - roughness, B - ambient occlusion."
+        },
+        {
+            "label": "Texture UV",
+            "bindingType": "defineSelect",
+            "values": [
+                {
+                    "value": "materialParamsTexUV 0",
+                    "label": "Mesh UV 0",
+                    "hint": "First UV set supplied by mesh. Default UV set on all meshes."
+                },
+                {
+                    "value": "materialParamsTexUV 1",
+                    "label": "Mesh UV 1",
+                    "hint": "Second UV set supplied by mesh. Optionally available if supplied from content creation tool."
+                },
+                {
+                    "value": "materialParamsTexUV 2",
+                    "label": "Transformed UV 2",
+                    "hint": "Requires 'Enable UV2' to be on."
+                },
+                {
+                    "value": "materialParamsTexUV 3",
+                    "label": "Transformed UV 3",
+                    "hint": "Requires 'Enable UV3' to be on."
+                }
+            ],
+            "hint": "Specifies the UV set used for sampling this texture."
+        },
+    {
+        "_bindingName": "ENABLE_SPECULAR_LIGHTING",
+        "widget": "group_end"
+    },
+    {
+    	"label": "Direct Lights",
+        "bindingName": "ENABLE_DIRECT_LIGHTS",
+        "bindingType": "define",
+        "hint": "Enables direct analytical lights (directional lights, point lights, etc.). \nDisabling this means objects will only be lit by the environment map, and rendering will be faster."
+    },
+    {
+    	"label": "Envmap",
+        "bindingName": "ENABLE_ENVMAP",
+        "bindingType": "define",
+        "widget": "group_start",
+        "hint": "Use an environment map for indirect diffuse and indirect specular lighting. \nDisabling this will use the constant ambient light instead, ie: the ambient light source in the scene, if there is one."
+    },
+    {
+        	"label": "Exposure",
+            "bindingName": "envmapExposure",
+            "widget": "slider",
+            "min": 0.0,
+            "max": 10.0,
+            "step": 0.001,
+            "default": 1.0,
+            "hint": "Changes the brightness of the environment."
+        },
+        {
+        	"label": "Rotation",
+            "bindingName": "envmapRotation",
+            "widget": "slider",
+            "min": -360.0,
+            "max": 360.0,
+            "step": 0.001,
+            "default": 1.0,
+            "hint": "Rotates the environment relative to world space."
+        },
+        {
+        	"label": "Diffuse Envmap",
+            "bindingName": "diffuseEnvmapTex",
+        	"widget": "texture_group",
+            "expanded": false
+        },
+        {
+            "label": "Specular Envmap",
+            "bindingName": "specularEnvmapTex",
+        	"widget": "texture_group",
+            "expanded": false
+        },
+        {
+        	"label": "From Camera",
+            "bindingName": "ENABLE_ENVMAP_FROM_CAMERA",
+            "bindingType": "define",
+            "widget": "group_start",
+            "hint": "Use the live camera feed as the source of the environment map. \nThis replaces the usual user specified environment map."
+        },
+            {
+            	"label": "Roughness",
+                "bindingName": "ENABLE_ENVMAP_FROM_CAMERA_ROUGHNESS",
+                "bindingType": "define",
+                "widget": "group_start",
+                "hint": "Enable blurring of camera envmap based on roughness."
+            },
+                {
+                	"label": "Blur Width",
+                    "bindingName": "reflBlurWidth",
+                    "widget": "slider",
+                    "min": 0.0,
+                    "max": 10.0,
+                    "step": 0.001,
+                    "default": 1.0,
+                    "hint": "Sets how blurry the reflections should be. \nThe wider the blur kernel, the blurrier the result."
+                },
+                {
+                	"label": "Blur Min Rough",
+                    "bindingName": "reflBlurMinRough",
+                    "widget": "slider",
+                    "min": 0.0,
+                    "max": 1.0,
+                    "step": 0.001,
+                    "default": 1.0,
+                    "hint": "Sets the minimum roughness at which blurring starts."
+                },
+                {
+                	"label": "Blur Max Rough",
+                    "bindingName": "reflBlurMaxRough",
+                    "widget": "slider",
+                    "min": 0.0,
+                    "max": 1.0,
+                    "step": 0.001,
+                    "default": 1.0,
+                    "hint": "Sets the roughness above which the reflections will be as blurry as they can get. \nThe blur width reaches the max set in 'Blur Width'."
+                },
+            {
+                "widget": "group_end"
+            },
+        {
+            "widget": "group_end"
+        },
+        {
+        	"label": "Specular AO",
+            "bindingName": "ENABLE_SPECULAR_AO",
+            "bindingType": "define",
+            "widget": "group_start",
+            "hint": "Allow AO to influence indirect specular lighting (reflections)."
+        },
+        {
+        	"label": "Intensity",
+            "bindingName": "specularAoIntensity",
+            "widget": "slider",
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.001,
+            "default": 1.0,
+            "hint": "Specifies the amount of influence AO has on reflections. \nFor metals the specular AO at its darkest approaches a saturated/darkened version of the metal color (ex: dark gold for gold). \nFor non-metals, this is essentially the same as 'Darkeing'."
+        },
+        {
+        	"label": "Darkening",
+            "bindingName": "specularAoDarkening",
+            "widget": "slider",
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.001,
+            "default": 1.0,
+            "hint": "For metals, this shifts the darkest AO color from a saturated version of the metal color towards pure black. \nFor non-metals it's essentially equivalent to 'Intensity'."
+        },
+        {
+            "_bindingName": "ENABLE_SPECULAR_AO",
+            "widget": "group_end"
+        },
+    {
+        "_bindingName": "ENABLE_ENVMAP",
+        "widget": "group_end"
+    },
+{
+    "_bindingName": "ENABLE_LIGHTING",
+    "widget": "group_end"
+},
+{
+	"label": "Fizzle",
+    "bindingName": "ENABLE_FIZZLE",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "Allows the material to fizzle in or out of existence according to a noise function, \ndriven by the 'transition' parameter (0 is fully visible and 1 is fully invisible)."
+},
+    {
+        "bindingName": "transition",
+        "widget": "slider",
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.001,
+        "default": 0.0,
+        "hint": "0 is fully visible and 1 is fully invisible. Partially fizzled out in between."
+    },
+{
+    "_bindingName": "ENABLE_FIZZLE",
+    "widget": "group_end"
+},
+{
+    "label": "Tone Mapping",
+    "bindingName": "ENABLE_TONE_MAPPING",
+    "bindingType": "define",
+    "hint": "Normally all lit and unlit materials are rendered with HDR tone mapping enabled, so that they fit into the 3D scene correctly. \nHowever, for some uses, like UI elements, or materials with specific blend modes, you might want to turn tone mapping off."
+},
+{
+	"label": "UV 2",
+    "bindingName": "ENABLE_UV2",
+    "bindingType": "define",
+    "widget": "group_start",
+    "addSeparator": true,
+    "hint": "Allows tiling and animation of texture coordinates."
+},
+{
+    "label": "Source",
+    "bindingType": "defineSelect",
+    "values": [
+        {
+            "value": "uv2 0",
+            "label": "Mesh UV 0",
+            "hint": "First UV set supplied by mesh. Default UV set on all meshes."
+        },
+        {
+            "value": "uv2 1",
+            "label": "Mesh UV 1",
+            "hint": "Second UV set supplied by mesh. Optionally available if supplied from content creation tool."
+        }
+    ],
+    "hint": "Specifies the UV set used as the base on top of which the transform is applied."
+},
+{
+	"label": "Scale",
+    "bindingName": "uv2Scale",
+    "min": -10.0,
+    "max": 10.0,
+    "step": 0.001,
+    "default": 1.0,
+    "hint": "Allows tiling of textures."
+},
+{
+	"label": "Offset",
+    "bindingName": "uv2Offset",
+    "min": -10.0,
+    "max": 10.0,
+    "step": 0.001,
+    "default": 0.0,
+    "hint": "Allows shifting of textures, or controls the speed of scrolling if animation is enabled."
+},
+{
+	"label": "Animation",
+    "bindingName": "ENABLE_UV2_ANIMATION",
+    "bindingType": "define",
+    "hint" : "If this is enabled, the UV's will scroll. In this case the Offset specifies the speed of scrolling. \nThe speed is 'Offset' UVs per second. So if 'Offset' is 2, the texture will scroll through two complete times per second."
+},
+{
+    "widget": "group_end"
+},
+{
+	"label": "UV 3",
+    "bindingName": "ENABLE_UV3",
+    "bindingType": "define",
+    "widget": "group_start",
+    "hint": "Allows tiling and animation of texture coordinates."
+},
+{
+    "label": "Source",
+    "bindingType": "defineSelect",
+    "values": [
+        {
+            "value": "uv3 0",
+            "label": "Mesh UV 0",
+            "hint": "First UV set supplied by mesh. Default UV set on all meshes."
+        },
+        {
+            "value": "uv3 1",
+            "label": "Mesh UV 1",
+            "hint": "Second UV set supplied by mesh. Optionally available if supplied from content creation tool."
+        },
+        {
+            "value": "uv3 2",
+            "label": "Transformed UV 2",
+            "hint": "Requires 'Enable UV2' to be on."
+        }
+    ],
+    "hint": "Specifies the UV set used as the base on top of which the transform is applied."
+},
+{
+	"label": "Scale",
+    "bindingName": "uv3Scale",
+    "min": -10.0,
+    "max": 10.0,
+    "step": 0.001,
+    "default": 1.0,
+    "hint": "Allows tiling of textures."
+},
+{
+	"label": "Offset",
+    "bindingName": "uv3Offset",
+    "min": -10.0,
+    "max": 10.0,
+    "step": 0.001,
+    "default": 0.0,
+    "hint": "Allows shifting of textures, or controls the speed of scrolling if animation is enabled."
+},
+{
+	"label": "Animation",
+    "bindingName": "ENABLE_UV3_ANIMATION",
+    "bindingType": "define",
+    "hint" : "If this is enabled, the UV's will scroll. In this case the Offset specifies the speed of scrolling. \nThe speed is 'Offset' UVs per second. So if 'Offset' is 2, the texture will scroll through two complete times per second."
+},
+{
+    "_bindingName": "ENABLE_UV3",
+    "widget": "group_end"
+}
+]
+}
